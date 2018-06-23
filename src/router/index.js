@@ -72,6 +72,19 @@ export const constantRouterMap = [
     ]
   },
 
+  {
+    path: '/UserAdmin',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        name: 'userAdmin',
+        component: () => import('@/views/UserAdmin/index'),
+        meta: { title: '用户管理', icon: 'form' }
+      }
+    ]
+  },
+
   { path: '*', redirect: '/404', hidden: true }
 ]
 
