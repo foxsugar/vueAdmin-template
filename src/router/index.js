@@ -78,9 +78,9 @@ export const constantRouterMap = [
     children: [
       {
         path: 'index',
-        name: '统计',
+        name: 'statistics',
         component: () => import('@/views/statistics/index'),
-        meta: { title: 'statistics', icon: 'form' }
+        meta: { title: '统计', icon: 'form' }
       }
     ]
   },
