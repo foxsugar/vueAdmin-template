@@ -24,7 +24,7 @@ export default {
     height: {
       type: String,
       default: '200px'
-    }
+    }jhnbgf
   },
   data() {
     return {

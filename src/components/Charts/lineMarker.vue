@@ -36,8 +36,19 @@ export default {
       chart: null
     }
   },
+
+  watch:{
+    onlineInfo:{
+      handler(curVal,oldVal){
+        this.initChart()
+      },
+      deep:true
+    }
+  },
   mounted() {
     this.initChart()
+  },
+  created(){
   },
   beforeDestroy() {
     if (!this.chart) {
