@@ -61,8 +61,8 @@
           var d = JSON.parse(response.data);
           var online = d.onlineData.info;
             for(var hour in online) {
-              var hi = parseInt(hour)
-              this.$set(this.onlineInfo.d1,hi,online[hi].user)
+              var hi = parseInt(hour);
+              this.$set(this.onlineInfo.d1,hi,online[hi].user);
               this.$set(this.onlineInfo.d2,hi,online[hi].room)
 //              console.log(this.onlineDate.d1)
             }

@@ -80,7 +80,7 @@ export const constantRouterMap = [
         path: 'index',
         name: 'statistics',
         component: () => import('@/views/statistics/index'),
-        meta: { title: '统计', icon: 'form' }
+        meta: { title: '统计', icon: 'chart' }
       }
     ]
   },

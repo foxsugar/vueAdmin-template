@@ -3,82 +3,100 @@
 </template>
 
 <script>
-import echarts from 'echarts'
-require('echarts/theme/macarons') // echarts theme
-import { debounce } from '@/utils'
+  import echarts from 'echarts'
+  require('echarts/theme/macarons') // echarts theme
+  import {debounce} from '@/utils'
 
-export default {
-  props: {
-    className: {
-      type: String,
-      default: 'chart'
-    },
-    width: {
-      type: String,
-      default: '100%'
-    },
-    height: {
-      type: String,
-      default: '300px'
-    }
-  },
-  data() {
-    return {
-      chart: null
-    }
-  },
-  mounted() {
-    this.initChart()
-    this.__resizeHanlder = debounce(() => {
-      if (this.chart) {
-        this.chart.resize()
+  export default {
+    props: {
+      className: {
+        type: String,
+        default: 'chart'
+      },
+      width: {
+        type: String,
+        default: '100%'
+      },
+      height: {
+        type: String,
+        default: '300px'
+      },
+      charge: {
+        wxCard: 0,
+        wxGold: 0,
+        appleCard: 0,
+        appleGold: 0
       }
-    }, 100)
-    window.addEventListener('resize', this.__resizeHanlder)
-  },
-  beforeDestroy() {
-    if (!this.chart) {
-      return
-    }
-    window.removeEventListener('resize', this.__resizeHanlder)
-    this.chart.dispose()
-    this.chart = null
-  },
-  methods: {
-    initChart() {
-      this.chart = echarts.init(this.$el, 'macarons')
+    },
+    data() {
+      return {
+        chart: null
+      }
+    },
 
-      this.chart.setOption({
-        tooltip: {
-          trigger: 'item',
-          formatter: '{a} <br/>{b} : {c} ({d}%)'
-        },
-        legend: {
-          left: 'center',
-          bottom: '10',
-          data: ['Industries', 'Technology', 'Forex', 'Gold', 'Forecasts']
-        },
-        calculable: true,
-        series: [
-          {
-            name: 'WEEKLY WRITE ARTICLES',
-            type: 'pie',
-            roseType: 'radius',
-            radius: [15, 95],
-            center: ['50%', '38%'],
-            data: [
-              { value: 320, name: 'Industries' },
-              { value: 240, name: 'Technology' },
-              { value: 149, name: 'Forex' },
-              { value: 100, name: 'Gold' },
-              { value: 59, name: 'Forecasts' }
-            ],
-            animationEasing: 'cubicInOut',
-            animationDuration: 2600
-          }
-        ]
-      })
+    watch: {
+
+      charge: {
+        deep: true,
+        handler(val) {
+          this.charge = val
+          this.initChart()
+        }
+      }
+
+    },
+    mounted() {
+      this.initChart()
+      this.__resizeHanlder = debounce(() => {
+        if (this.chart) {
+          this.chart.resize()
+        }
+      }, 100)
+      window.addEventListener('resize', this.__resizeHanlder)
+    },
+    beforeDestroy() {
+      if (!this.chart) {
+        return
+      }
+      window.removeEventListener('resize', this.__resizeHanlder)
+      this.chart.dispose()
+      this.chart = null
+    },
+    methods: {
+      initChart() {
+        this.chart = echarts.init(this.$el, 'macarons')
+
+        this.chart.setOption({
+          tooltip: {
+            trigger: 'item',
+            formatter: '{a} <br/>{b} : {c} ({d}%)'
+          },
+          legend: {
+            left: 'center',
+            bottom: '10',
+            data: ['微信房卡', '微信元宝', '苹果房卡', '苹果元宝']
+          },
+          calculable: true,
+          series: [
+            {
+              name: 'WEEKLY WRITE ARTICLES',
+              type: 'pie',
+              roseType: 'radius',
+              radius: [15, 95],
+              center: ['50%', '38%'],
+              data: [
+                {value: this.charge.wxCard, name: '微信房卡'},
+                {value: this.charge.wxGold, name: '微信元宝'},
+                {value: this.charge.appleCard, name: '苹果房卡'},
+                {value: this.charge.appleGold, name: '苹果元宝'},
+//              { value: 59, name: 'Forecasts' }
+              ],
+              animationEasing: 'cubicInOut',
+              animationDuration: 2600
+            }
+          ]
+        })
+      }
     }
   }
-}
 </script>
