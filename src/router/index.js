@@ -50,26 +50,32 @@ export const constantRouterMap = [
         meta: { title: '玩家管理', icon: 'form' }
       },
       {
-        path: 'index',
-        name: 'userAdmin',
-        component: () => import('@/views/roleAdmin/index'),
+        path: 'delegates',
+        name: 'delegateAdmin',
+        component: () => import('@/views/delegateAdmin/index'),
         meta: { title: '代理管理', icon: 'form' }
+      },
+      {
+        path: 'partners',
+        name: 'partnerAdmin',
+        component: () => import('@/views/partnerAdmin/index'),
+        meta: { title: '合伙人', icon: 'form' }
       }
     ]
   },
 
-  {
-    path: '/form',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        name: 'Form',
-        component: () => import('@/views/form/index'),
-        meta: { title: 'Form', icon: 'form' }
-      }
-    ]
-  },
+  // {
+  //   path: '/form',
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: 'index',
+  //       name: 'Form',
+  //       component: () => import('@/views/form/index'),
+  //       meta: { title: 'Form', icon: 'form' }
+  //     }
+  //   ]
+  // },
 
   {
     path: '/statistics',
@@ -115,6 +121,18 @@ export const constantRouterMap = [
       }
     ]
   },
+  // {
+  //   path: '/orderAdmin',
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: 'index',
+  //       name: 'orderAdmin',
+  //       component: () => import('@/views/orderAdmin/index'),
+  //       meta: { title: '订单管理', icon: 'form' }
+  //     }
+  //   ]
+  // },
   // {
   //   path: '/roleAdmin',
   //   component: Layout,

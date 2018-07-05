@@ -8,7 +8,7 @@
       </el-input>
       &nbsp;
       <el-button class="filter-item" type="primary" v-waves icon="search" @click="handleFilter">搜索</el-button>
-      <el-button type="primary" @click="handleTimerFilter">高级查询</el-button>
+      <!--<el-button type="primary" @click="handleTimerFilter">高级查询</el-button>-->
       <br>
       <br>
 
@@ -111,55 +111,46 @@
         </el-table-column>
 
         <el-table-column
-          prop="account"
-          label="用户账号"
-          width="120">
-        </el-table-column>
-
-        <el-table-column
-          prop="username"
+          prop="name"
           label="用户昵称"
           width="120">
         </el-table-column>
 
         <el-table-column
-          prop="registDate"
-          label="注册时间"
-          width="160">
-        </el-table-column>
-
-        <el-table-column
-          prop="gold"
-          label="金币"
+          prop="rebate"
+          label="可结算额"
           width="120">
         </el-table-column>
 
         <el-table-column
-          prop="money"
-          label="房卡"
+          prop="isPartnerDes"
+          label="身份"
           width="120">
         </el-table-column>
 
         <el-table-column
-          prop="ipConfig"
-          label="登录IP"
+          prop="partnerId"
+          label="合伙人ID"
           width="120">
         </el-table-column>
 
         <el-table-column
-          prop="lastLoginDate"
-          label="上次登录时间"
-          width="160">
+          prop="parentId"
+          label="上级代理ID"
+          width="120">
+        </el-table-column>
+
+        <el-table-column
+          prop="phone"
+          label="电话号码"
+          width="120">
         </el-table-column>
 
         <el-table-column
           fixed="right"
           label="操作"
-          width="100">
+          min-width="100">
           <template slot-scope="scope">
-            <el-button type="small" @click="awardRoomCard(scope)" round>赠送房卡</el-button>
-            <br>
-            <br>
             <el-button type="small" @click="detailInfo(scope)" round>更多操作</el-button>
           </template>
         </el-table-column>
@@ -175,13 +166,17 @@
 
 <script>
   import { fetchAllPlayers, fetchPlayer, doCharge, doSearchTime, roleInfo, toAgent, toPartner, toUser} from '../../api/roleAdmin'
+  // import {fetchDelegates, fetchDelegate} from "../../api/delegatesAdmin";
+  import {fetchPartner, fetchPartners} from "../../api/partner";
+
   export default {
     methods: {
       fetchAll() {
-        fetchAllPlayers(this.listQuery.limit, this.listQuery.page).then(response => {
+        fetchPartners(this.listQuery.page).then(response => {
           console.log(response)
           this.tableData = response.data.list
           this.total = response.data.total
+          // alert(this.total)
         })
       },
       fetchOne() {
@@ -191,7 +186,7 @@
           this.searchMode = 0
           this.listQuery.page = 0
         }
-        fetchPlayer(this.userId).then(response => {
+        fetchPartners(this.userId).then(response => {
           console.log(response)
           this.tableData = response.data.list
           this.total = response.data.total
