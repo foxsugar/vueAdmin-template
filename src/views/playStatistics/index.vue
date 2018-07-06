@@ -50,20 +50,20 @@
       </div>
       <br>
       <!--<div class="block">-->
-        <!--<div style="padding-bottom: 10px">-->
-          <!--按最近登录时间:-->
-        <!--</div>-->
-        <!--<el-date-picker-->
-          <!--v-model="valueLog"-->
-          <!--value-format="yyyy-MM-dd"-->
-          <!--type="daterange"-->
-          <!--align="right"-->
-          <!--unlink-panels-->
-          <!--range-separator="-"-->
-          <!--start-placeholder="开始日期"-->
-          <!--end-placeholder="结束日期"-->
-          <!--:picker-options="pickerOptions2">-->
-        <!--</el-date-picker>-->
+      <!--<div style="padding-bottom: 10px">-->
+      <!--按最近登录时间:-->
+      <!--</div>-->
+      <!--<el-date-picker-->
+      <!--v-model="valueLog"-->
+      <!--value-format="yyyy-MM-dd"-->
+      <!--type="daterange"-->
+      <!--align="right"-->
+      <!--unlink-panels-->
+      <!--range-separator="-"-->
+      <!--start-placeholder="开始日期"-->
+      <!--end-placeholder="结束日期"-->
+      <!--:picker-options="pickerOptions2">-->
+      <!--</el-date-picker>-->
       <!--</div>-->
       <span slot="footer" class="dialog-footer">
     <el-button @click="doCancel">取 消</el-button>
@@ -239,14 +239,7 @@
         doCharge(this.currentId, this.presentMoney).then(response => {
           this.tableData.forEach(td => {
             if (td.id === this.currentId) {
-
-              var type = response.data.type
-              if (type == '1'){
-                td.money = response.data.money + td.money
-              }else{
-                td.gold += response.data.money + td.gold
-              }
-
+              td.money = response.data
             }
             this.$message({
               message: '充值成功',

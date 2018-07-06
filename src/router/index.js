@@ -122,6 +122,19 @@ export const constantRouterMap = [
     ]
   },
   // {
+  //   path: '/playStatistics',
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: 'index',
+  //       name: 'playStatistics',
+  //       component: () => import('@/views/playStatistics/index'),
+  //       meta: { title: '约战统计', icon: 'people' }
+  //     }
+  //   ]
+  // },
+  // playStatistics
+  // {
   //   path: '/orderAdmin',
   //   component: Layout,
   //   children: [

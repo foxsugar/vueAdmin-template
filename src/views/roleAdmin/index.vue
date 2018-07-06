@@ -15,12 +15,21 @@
     </div>
 
     <el-dialog
-      title="赠送房卡"
+      title="赠送房卡或金币"
       :visible.sync="dialogVisible"
       width="30%"
       :before-close="handleClose"
       center>
-      <el-input v-model="presentMoney" placeholder="请输入赠送房卡数"></el-input>
+
+      <div style="text-align: center">
+        <template>
+          <el-radio v-model="radio2" label="1">房卡</el-radio>
+          <el-radio v-model="radio2" label="2">金币</el-radio>
+        </template>
+      </div>
+      <br>
+
+      <el-input v-model="presentMoney" placeholder="请输入"></el-input>
       <span slot="footer" class="dialog-footer">
     <el-button @click="dialogVisible = false">取 消</el-button>
     <el-button type="primary" @click="doCharge">确 定</el-button>
@@ -174,7 +183,7 @@
 </template>
 
 <script>
-  import { fetchAllPlayers, fetchPlayer, doCharge, doSearchTime, roleInfo, toAgent, toPartner, toUser} from '../../api/roleAdmin'
+  import { fetchAllPlayers, fetchPlayer, doCharge, doChargeNew, doSearchTime, roleInfo, toAgent, toPartner, toUser} from '../../api/roleAdmin'
   export default {
     methods: {
       fetchAll() {
@@ -242,10 +251,16 @@
         }
       },
       doCharge() {
-        doCharge(this.currentId, this.presentMoney).then(response => {
+
+        doChargeNew(this.currentId, this.presentMoney, this.radio2).then(response => {
           this.tableData.forEach(td => {
             if (td.id === this.currentId) {
-              td.money = response.data
+              if (response.data.type == '1'){
+                td.money = response.data.money + td.money
+              }else {
+                td.gold += response.data.money + td.gold
+              }
+
             }
             this.$message({
               message: '充值成功',
@@ -357,6 +372,7 @@
         timerDialogVisible: false,
         detailVisible: false,
         radio: "1",
+        radio2: "1",
         listQuery: {
           page: 1,
           limit: 20,

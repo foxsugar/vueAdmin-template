@@ -26,7 +26,19 @@ export function doCharge(uid, val) {
     method: 'post',
     params: {
       'userId': uid,
-      'money': val
+      'money': val,
+    }
+  })
+}
+
+export function doChargeNew(uid, val, t) {
+  return request({
+    url: '/admin/doChargeNew',
+    method: 'post',
+    params: {
+      'userId': uid,
+      'money': val,
+      'type': t
     }
   })
 }
