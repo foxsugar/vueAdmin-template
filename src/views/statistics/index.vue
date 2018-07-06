@@ -37,7 +37,7 @@
 
 
     <!--<div class="chart-wrapper">-->
-      <!--<raddar-chart :chartdata="gameData"></raddar-chart>-->
+    <!--<raddar-chart :chartdata="gameData"></raddar-chart>-->
     <!--</div>-->
     <!--<el-row :gutter="8">-->
     <!--<el-col :xs="{span: 24}" :sm="{span: 24}" :md="{span: 24}" :lg="{span: 12}" :xl="{span: 12}" style="padding-right:8px;margin-bottom:30px;">-->
@@ -59,7 +59,7 @@
 <script>
   import PanelGroup from './components/PanelGroup'
   import LineChart from './components/LineChart'
-  import RaddarChart from './components/RaddarChart'
+  //  import RaddarChart from './components/RaddarChart'
   import PieChart from './components/PieChart'
   import BarChart from './components/BarChart'
 
@@ -93,7 +93,7 @@
     components: {
       PanelGroup,
       LineChart,
-      RaddarChart,
+//      RaddarChart,
       PieChart,
       BarChart,
 //    TransactionTable,
@@ -129,9 +129,7 @@
           xName: [],
           d1: [],
         },
-        gameData:{
-
-        }
+        gameData: {}
       }
     },
 
@@ -164,29 +162,53 @@
           d1: [],
           d2: []
         }
-          this.chargeData = {
-            wxCard: 0,
-            wxGold: 0,
-            appleCard: 0,
-            appleGold: 0
-          }
-          this.gameDistribution = {
-            xName: [],
-            d1: [],
-          }
+        this.chargeData = {
+          wxCard: 0,
+          wxGold: 0,
+          appleCard: 0,
+          appleGold: 0
+        }
+        this.gameDistribution = {
+          xName: [],
+          d1: [],
+        }
+      },
+      getYuNumber(p){
+        let r = 0;
+        if ((p >> 2) === 1) r = 2;
+        if ((p >> 5) === 1) r = 5;
+        if ((p >> 8) === 1) r = 8;
+        if ((p >> 12) === 1) r = 12;
+        if ((p >> 20) === 1) r = 20;
+        return r + '鱼';
       },
       getGameName(model){
 
         console.log("======================", model)
         let o = JSON.parse(model)
-        let t = o.goldRoomType === 0 ? '房卡' : '元宝';
-        return t + '|' + o.gameType + '|' + o.gameNumber + '局'
+        let gameName = o.gameType
+        let p = '';
+        if (o.gameType === "HS") {
+          gameName = "划水"
+          p = this.getYuNumber(o.params.mode)
+
+
+        } else if (o.gameType === "285") {
+          gameName = "赢三张"
+        } else if (o.gameType === "235") {
+          gameName = "五子棋"
+        }
+
+//        let t = o.goldRoomType;
+
+        if (o.goldRoomType === 0) {
+          return '房卡' + gameName + p+ o.gameNumber + "局"
+        } else {
+          return '元宝' + gameName + p + o.goldRoomType+'底分'
+        }
       },
+
       getOnlineInfo(date){
-
-
-
-
 
 
         const data = [];
@@ -203,10 +225,10 @@
           let key;
           this.showChart = true;
           let d = JSON.parse(response.data);
-          if (d === undefined) {
+
+          if (d === undefined || d === null || JSON.stringify(d) === '{}') {
             this.initData()
           } else {
-
 
 
             let online = d.onlineData.info;

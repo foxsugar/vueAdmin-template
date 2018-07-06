@@ -29,12 +29,16 @@ export default {
       type: Object,
       xName:[],
       d1: [],
-      d2: []
-    }
+      d2: ''
+    },
+
+    linecolor:'red'
+
   },
   data() {
     return {
-      chart: null
+      chart: null,
+
     }
   },
   mounted() {
@@ -75,11 +79,11 @@ export default {
     }
   },
   methods: {
-    setOptions(xName, d1, d2 ) {
+    setOptions(xName, d1 ,d2) {
       this.chart.setOption({
         xAxis: {
           data: xName,
-          boundaryGap: false,
+          boundaryGap: true,
           axisTick: {
             show: false
           }
@@ -104,47 +108,29 @@ export default {
           }
         },
         legend: {
-          data: ['在线人数', '房间数']//曲线说明
+          data: [d2]//曲线说明
         },
         series: [{
-          name: '在线人数', itemStyle: {
+          name: d2, itemStyle: {
             normal: {
-              color: '#FF005A',
+              color: this.linecolor,
               lineStyle: {
-                color: '#FF005A',
+//                color: '#FF005A',
                 width: 2
               }
             }
           },
-          smooth: false,//是否平滑
+          smooth: true,//是否平滑
           type: 'line',
           data: d1,
           animationDuration: 2800,
           animationEasing: 'cubicInOut'
         },
-        {
-          name: '房间数',
-          smooth: false,//是否平滑
-          type: 'line',
-          itemStyle: {
-            normal: {
-              color: '#3888fa',
-              lineStyle: {
-                color: '#3888fa',
-                width: 2
-              },
-              areaStyle: {
-                color: '#f3f8ff'
-              }
-            }
-          },
-          data: d2,
-          animationDuration: 2800,
-          animationEasing: 'quadraticOut'
-        }]
+      ]
       })
     },
     initChart() {
+        console.log(this.$el)
       this.chart = echarts.init(this.$el, 'macarons')
       this.setOptions(this.chart_data.xName, this.chart_data.d1, this.chart_data.d2)
     }
