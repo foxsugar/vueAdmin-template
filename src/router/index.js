@@ -80,12 +80,21 @@ export const constantRouterMap = [
   {
     path: '/statistics',
     component: Layout,
+    redirect: '/example/table',
+    name: 'statistics',
+    meta: { title: '统计', icon: 'chart' },
     children: [
       {
         path: 'index',
         name: 'statistics',
         component: () => import('@/views/statistics/index'),
-        meta: { title: '统计', icon: 'chart' }
+        meta: { title: '每日数据', icon: 'chart' }
+      },
+      {
+        path: 'index2',
+        name: 'statistics2',
+        component: () => import('@/views/statistics/index2'),
+        meta: { title: '数据走势', icon: 'chart' }
       }
     ]
   },

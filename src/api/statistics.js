@@ -10,3 +10,13 @@ export function onlineInfo(date) {
   })
 }
 
+
+export function getLogByDates(num) {
+  return request({
+    url: '/admin/getLogByDates',
+    method: 'post',
+    params: {
+      num
+    }
+  })
+}

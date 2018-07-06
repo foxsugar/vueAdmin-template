@@ -35,6 +35,10 @@
       </el-col>
     </el-row>
 
+
+    <!--<div class="chart-wrapper">-->
+    <!--<raddar-chart :chartdata="gameData"></raddar-chart>-->
+    <!--</div>-->
     <!--<el-row :gutter="8">-->
     <!--<el-col :xs="{span: 24}" :sm="{span: 24}" :md="{span: 24}" :lg="{span: 12}" :xl="{span: 12}" style="padding-right:8px;margin-bottom:30px;">-->
     <!--<transaction-table></transaction-table>-->
@@ -55,7 +59,7 @@
 <script>
   import PanelGroup from './components/PanelGroup'
   import LineChart from './components/LineChart'
-  import RaddarChart from './components/RaddarChart'
+  //  import RaddarChart from './components/RaddarChart'
   import PieChart from './components/PieChart'
   import BarChart from './components/BarChart'
 
@@ -89,7 +93,7 @@
     components: {
       PanelGroup,
       LineChart,
-      RaddarChart,
+//      RaddarChart,
       PieChart,
       BarChart,
 //    TransactionTable,
@@ -99,6 +103,8 @@
     data() {
       return {
         lineChartData: lineChartData.newVisitis,
+        dateValue: null,
+
         panelData: {
           chargeRebate: 0,
           goldIncome: 0,
@@ -107,7 +113,7 @@
           chargeIncome: 0,
           takeOutNum: 0
         },
-        dateValue: null,
+
         onlineInfo: {
           xName: [],
           d1: [],
@@ -122,11 +128,13 @@
         gameDistribution: {
           xName: [],
           d1: [],
-        }
+        },
+        gameData: {}
       }
     },
 
     mounted(){
+      this.initData();
       this.getOnlineInfo(new Date())
     },
 
@@ -139,14 +147,70 @@
         this.getOnlineInfo(this.dateValue)
       },
 
+      initData(){
+        this.panelData = {
+          chargeRebate: 0,
+          goldIncome: 0,
+          gameNum: 0,
+          registerUser: 0,
+          chargeIncome: 0,
+          takeOutNum: 0
+        }
+
+        this.onlineInfo = {
+          xName: [],
+          d1: [],
+          d2: []
+        }
+        this.chargeData = {
+          wxCard: 0,
+          wxGold: 0,
+          appleCard: 0,
+          appleGold: 0
+        }
+        this.gameDistribution = {
+          xName: [],
+          d1: [],
+        }
+      },
+      getYuNumber(p){
+        let r = 0;
+        if ((p >> 2) === 1) r = 2;
+        if ((p >> 5) === 1) r = 5;
+        if ((p >> 8) === 1) r = 8;
+        if ((p >> 12) === 1) r = 12;
+        if ((p >> 20) === 1) r = 20;
+        return r + '鱼';
+      },
       getGameName(model){
 
-        console.log("======================",model)
+        console.log("======================", model)
         let o = JSON.parse(model)
-        let t = o.goldRoomType === 0 ? '房卡' : '元宝';
-        return t + '|' + o.gameType + '|' + o.gameNumber + '局'
+        let gameName = o.gameType
+        let p = '';
+        if (o.gameType === "HS") {
+          gameName = "划水"
+          p = this.getYuNumber(o.params.mode)
+
+
+        } else if (o.gameType === "285") {
+          gameName = "赢三张"
+        } else if (o.gameType === "235") {
+          gameName = "五子棋"
+        }
+
+//        let t = o.goldRoomType;
+
+        if (o.goldRoomType === 0) {
+          return '房卡' + gameName + p+ o.gameNumber + "局"
+        } else {
+          return '元宝' + gameName + p + o.goldRoomType+'底分'
+        }
       },
+
       getOnlineInfo(date){
+
+
         const data = [];
         for (let i = 0; i < 24; i++) {
           data.push(i + 'hour')
@@ -161,66 +225,74 @@
           let key;
           this.showChart = true;
           let d = JSON.parse(response.data);
-          let online = d.onlineData.info;
-          for (let hour in online) {
-            let hi = parseInt(hour);
-            this.$set(this.onlineInfo.d1, hi, online[hi].user);
-            this.$set(this.onlineInfo.d2, hi, online[hi].room);
-          }
 
-          // chargeRebate
-          let goldIncome = 0;
-          for (key in d.goldRoomIncomeData.info) {
-            goldIncome += d.goldRoomIncomeData.info[key]
-          }
-
-          let gameNum = 0;
-          console.log(d.gameNumData.info)
-          this.gameDistribution.xName = []
-          this.gameDistribution.d1 = []
-          for (key in d.gameNumData.info) {
-            gameNum += parseInt(d.gameNumData.info[key])
-            let name = this.getGameName(key)
-            this.gameDistribution.xName.push(name)
-            this.gameDistribution.d1.push(d.gameNumData.info[key])
-          }
-          console.log(this.gameDistribution)
-
-          //充值返利
-          this.panelData.chargeRebate = d.chargeRebate;
-          //金币收入
-          this.panelData.goldIncome = parseInt(goldIncome);
-          //牌局数
-          this.panelData.gameNum = parseInt(gameNum);
+          if (d === undefined || d === null || JSON.stringify(d) === '{}') {
+            this.initData()
+          } else {
 
 
-          if (d.logInfo !== undefined) {
-            this.panelData.registerUser = d.logInfo.registerUser;
-//
-            this.panelData.takeOutNum = d.logInfo.takeOutNum;
+            let online = d.onlineData.info;
+            console.log("onleintdata", online)
+            for (let hour in online) {
+              let hi = parseInt(hour);
+              this.$set(this.onlineInfo.d1, hi, online[hi].user);
+              this.$set(this.onlineInfo.d2, hi, online[hi].room);
+            }
+            console.log("onleintdata", this.onlineInfo)
 
-            let allCharge = 0;
-            for (key in d.logInfo.chargeInfo) {
-              allCharge += parseInt(d.logInfo.chargeInfo[key])
+            // chargeRebate
+            let goldIncome = 0;
+            for (key in d.goldRoomIncomeData.info) {
+              goldIncome += d.goldRoomIncomeData.info[key]
             }
 
-            //总金额
-            this.panelData.chargeIncome = allCharge;
-            //充值分布
-            this.chargeData.wxCard = d.logInfo.chargeInfo['1|0'] | 0;
-            this.chargeData.wxGold = d.logInfo.chargeInfo['1|1'] | 0;
-            this.chargeData.appleCard = d.logInfo.chargeInfo['8|0'] | 0;
-            this.chargeData.appleGold = d.logInfo.chargeInfo['8|1'] | 0;
-          } else {
-            this.panelData.registerUser = 0;
-            this.panelData.takeOutNum = 0;
-            this.panelData.chargeIncome = 0;
-            this.chargeData.wxCard = 0;
-            this.chargeData.wxGold = 0;
-            this.chargeData.appleCard = 0;
-            this.chargeData.appleGold = 0;
-          }
+            let gameNum = 0;
+            console.log(d.gameNumData.info)
+            this.gameDistribution.xName = []
+            this.gameDistribution.d1 = []
+            for (key in d.gameNumData.info) {
+              gameNum += parseInt(d.gameNumData.info[key])
+              let name = this.getGameName(key)
+              this.gameDistribution.xName.push(name)
+              this.gameDistribution.d1.push(d.gameNumData.info[key])
+            }
+//            console.log(this.gameDistribution)
 
+            //充值返利
+            this.panelData.chargeRebate = d.chargeRebate;
+            //金币收入
+            this.panelData.goldIncome = parseInt(goldIncome);
+            //牌局数
+            this.panelData.gameNum = parseInt(gameNum);
+
+
+            if (d.logInfo !== undefined) {
+              this.panelData.registerUser = d.logInfo.registerUser;
+//
+              this.panelData.takeOutNum = d.logInfo.takeOutNum;
+
+              let allCharge = 0;
+              for (key in d.logInfo.chargeInfo) {
+                allCharge += parseInt(d.logInfo.chargeInfo[key])
+              }
+
+              //总金额
+              this.panelData.chargeIncome = allCharge;
+              //充值分布
+              this.chargeData.wxCard = d.logInfo.chargeInfo['1|0'] | 0;
+              this.chargeData.wxGold = d.logInfo.chargeInfo['1|1'] | 0;
+              this.chargeData.appleCard = d.logInfo.chargeInfo['8|0'] | 0;
+              this.chargeData.appleGold = d.logInfo.chargeInfo['8|1'] | 0;
+            } else {
+              this.panelData.registerUser = 0;
+              this.panelData.takeOutNum = 0;
+              this.panelData.chargeIncome = 0;
+              this.chargeData.wxCard = 0;
+              this.chargeData.wxGold = 0;
+              this.chargeData.appleCard = 0;
+              this.chargeData.appleGold = 0;
+            }
+          }
 
         });
       },
