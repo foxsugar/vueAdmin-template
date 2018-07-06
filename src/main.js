@@ -20,6 +20,11 @@ Vue.use(ElementUI, { locale })
 
 Vue.config.productionTip = false
 
+// 引入echarts
+import echarts from 'echarts'
+
+Vue.prototype.$echarts = echarts
+
 new Vue({
   el: '#app',
   router,

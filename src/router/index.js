@@ -36,41 +36,46 @@ export const constantRouterMap = [
       component: () => import('@/views/dashboard/index')
     }]
   },
-
   {
     path: '/example',
     component: Layout,
     redirect: '/example/table',
-    name: 'Example',
-    meta: { title: 'Example', icon: 'example' },
+    name: 'example',
+    meta: { title: '用户管理', icon: 'example' },
     children: [
       {
-        path: 'table',
-        name: 'Table',
-        component: () => import('@/views/table/index'),
-        meta: { title: 'Table', icon: 'table' }
+        path: 'index',
+        name: 'userAdmin',
+        component: () => import('@/views/roleAdmin/index'),
+        meta: { title: '玩家管理', icon: 'form' }
       },
       {
-        path: 'tree',
-        name: 'Tree',
-        component: () => import('@/views/tree/index'),
-        meta: { title: 'Tree', icon: 'tree' }
+        path: 'delegates',
+        name: 'delegateAdmin',
+        component: () => import('@/views/delegateAdmin/index'),
+        meta: { title: '代理管理', icon: 'form' }
+      },
+      {
+        path: 'partners',
+        name: 'partnerAdmin',
+        component: () => import('@/views/partnerAdmin/index'),
+        meta: { title: '合伙人', icon: 'form' }
       }
     ]
   },
 
-  {
-    path: '/form',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        name: 'Form',
-        component: () => import('@/views/form/index'),
-        meta: { title: 'Form', icon: 'form' }
-      }
-    ]
-  },
+  // {
+  //   path: '/form',
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: 'index',
+  //       name: 'Form',
+  //       component: () => import('@/views/form/index'),
+  //       meta: { title: 'Form', icon: 'form' }
+  //     }
+  //   ]
+  // },
 
   {
     path: '/statistics',
@@ -93,20 +98,78 @@ export const constantRouterMap = [
       }
     ]
   },
-
+  // {
+  //   path: '/roleAdmin',
+  //   component: Layout,
+  //   redirect: '/roleAdmin/index',
+  //   name: '用户管理',
+  //   children: [
+  //     {
+  //       path: 'index',
+  //       name: 'userAdmin',
+  //       component: () => import('@/views/roleAdmin/index'),
+  //       meta: { title: '玩家管理', icon: 'form' }
+  //     },
+  //     {
+  //       path: 'index',
+  //       name: 'userAdmin',
+  //       component: () => import('@/views/roleAdmin/index'),
+  //       meta: { title: '--', icon: 'form' }
+  //     }
+  //   ]
+  // },
   {
-    path: '/UserAdmin',
+    path: '/orderAdmin',
     component: Layout,
     children: [
       {
         path: 'index',
-        name: 'userAdmin',
-        component: () => import('@/views/UserAdmin/index'),
-        meta: { title: '用户管理', icon: 'form' }
+        name: 'orderAdmin',
+        component: () => import('@/views/orderAdmin/index'),
+        meta: { title: '订单管理', icon: 'form' }
       }
     ]
   },
+  // {
+  //   path: '/orderAdmin',
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: 'index',
+  //       name: 'orderAdmin',
+  //       component: () => import('@/views/orderAdmin/index'),
+  //       meta: { title: '订单管理', icon: 'form' }
+  //     }
+  //   ]
+  // },
+  // {
+  //   path: '/roleAdmin',
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: 'index',
+  //       name: 'roleAdmin',
+  //       component: () => import('@/views/roleAdmin/index'),
+  //       meta: { title: '用户管理', icon: 'user' }
+  //     }
+  //   ]
+  // },
 
+  // {
+  //   path: '/roleAdmin',
+  //   component: Layout,
+  //   redirect: '/example/table',
+  //   name: 'roleAdmin',
+  //   meta: { title: '用户管理', icon: 'example' },
+  //   children: [
+  //     {
+  //       path: 'index',
+  //       name: 'index',
+  //       component: () => import('@/views/roleAdmin/index'),
+  //       meta: { title: 'Table', icon: 'table' }
+  //     }
+  //   ],
+  // },
   { path: '*', redirect: '/404', hidden: true }
 ]
 
