@@ -60,6 +60,12 @@ export const constantRouterMap = [
         name: 'partnerAdmin',
         component: () => import('@/views/partnerAdmin/index'),
         meta: { title: '合伙人', icon: 'form' }
+      },
+      {
+        path: 'tree2',
+        name: 'tree2',
+        component: () => import('@/views/tree/test2'),
+        meta: { title: '代理关系', icon: 'peoples' }
       }
     ]
   },
@@ -130,6 +136,30 @@ export const constantRouterMap = [
       }
     ]
   },
+  // {
+  //   path: '/tree',
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: 'tree',
+  //       name: 'tree',
+  //       component: () => import('@/views/tree/test'),
+  //       meta: { title: 'test', icon: 'form' }
+  //     }
+  //   ]
+  // },
+  // {
+  //   path: '/tree2',
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: 'tree2',
+  //       name: 'tree2',
+  //       component: () => import('@/views/tree/test2'),
+  //       meta: { title: 'test2', icon: 'form' }
+  //     }
+  //   ]
+  // },
   // {
   //   path: '/playStatistics',
   //   component: Layout,

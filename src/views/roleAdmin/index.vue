@@ -258,7 +258,7 @@
               if (response.data.type == '1'){
                 td.money = response.data.money + td.money
               }else {
-                td.gold += response.data.money + td.gold
+                td.gold += response.data.money
               }
 
             }
