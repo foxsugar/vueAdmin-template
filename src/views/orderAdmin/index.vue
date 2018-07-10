@@ -130,6 +130,15 @@
         </el-table-column>
 
         <el-table-column
+          prop="recharge_source"
+          label="充值来源"
+          :formatter="sourceFormat"
+          width="120">
+        </el-table-column>
+
+
+
+        <el-table-column
           prop="status"
           label="订单状态"
           :formatter="statusF"
@@ -166,6 +175,27 @@
         }else {
           return ""
         }
+      },
+      sourceFormat(row, column) {
+        // 1 微信  2 支付宝  3 分享赠送  4 充值卡  5绑定赠送  11.提现
+        if (row.recharge_source === '0') {
+          return 'o'
+        } else if (row.recharge_source === '1') {
+          return '微信'
+        }else if (row.recharge_source === '2') {
+          return "支付宝"
+        }else if (row.recharge_source === '2') {
+          return "分享赠送"
+        }else if (row.recharge_source === '4') {
+          return "充值卡"
+        }else if (row.recharge_source === '5') {
+          return "绑定赠送"
+        }else if (row.recharge_source === '11') {
+          return "提现"
+        }else if (row.recharge_source === '7') {
+          return "why?"
+        }
+        return ''
       },
       moneyFormat(row, column){
         return "￥" + row.money;

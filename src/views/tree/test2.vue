@@ -3,14 +3,14 @@
     <!--创建一个echarts的容器-->
     <!--<el-input v-model="agentId" placeholder="请输入内容"></el-input>-->
     <br>
-    <div style="margin-left: 25px">
+    <div style="margin-left: 25px; padding-left: 25px">
       <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" placeholder="代理ID"
                 v-model="agentId">
       </el-input>
       &nbsp;&nbsp;
       <el-button class="filter-item" type="primary" v-waves icon="search" @click="handleFilter">搜索</el-button>
     </div>
-    <div id="echartContainer" style="width:100%; height:500px;"></div>
+    <div id="echartContainer" style="width:90%; height:500px;"></div>
   </div>
 </template>
 
@@ -18,8 +18,8 @@
   import {delegateRel} from "../../api/tree";
   // import {echar}
   var echarts = require('echarts')
+  var myChart = null
 
-  var myChart = null;
   export default {
     watch: {
       filterText(val) {
@@ -54,9 +54,8 @@
       setupCharts(da){
         // alert(da.toString())
 
-        if (myChart == null){
-          myChart = echarts.init(document.getElementById('echartContainer'));
-        }
+        myChart = echarts.init(document.getElementById('echartContainer'));
+
         myChart.clear()
         // myChart.showLoading();
 
