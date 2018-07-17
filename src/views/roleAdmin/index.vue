@@ -164,7 +164,7 @@
         <el-table-column
           fixed="right"
           label="操作"
-          width="100">
+          min-width="100">
           <template slot-scope="scope">
             <el-button type="small" @click="awardRoomCard(scope)" round>赠送房卡</el-button>
             <br>
