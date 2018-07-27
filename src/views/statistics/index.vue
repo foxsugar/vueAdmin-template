@@ -243,7 +243,7 @@
             // chargeRebate
             let goldIncome = 0;
             for (key in d.goldRoomIncomeData.info) {
-              goldIncome += d.goldRoomIncomeData.info[key]
+              goldIncome += parseInt(d.goldRoomIncomeData.info[key])
             }
 
             let gameNum = 0;
