@@ -41,7 +41,7 @@ export const constantRouterMap = [
     component: Layout,
     redirect: '/example/table',
     name: 'example',
-    meta: { title: '用户管理', icon: 'example' },
+    meta: { title: '用户管理', icon: 'form' },
     children: [
       {
         path: 'index',
@@ -69,20 +69,6 @@ export const constantRouterMap = [
       }
     ]
   },
-
-  // {
-  //   path: '/form',
-  //   component: Layout,
-  //   children: [
-  //     {
-  //       path: 'index',
-  //       name: 'Form',
-  //       component: () => import('@/views/form/index'),
-  //       meta: { title: 'Form', icon: 'form' }
-  //     }
-  //   ]
-  // },
-
   {
     path: '/statistics',
     component: Layout,
@@ -104,26 +90,6 @@ export const constantRouterMap = [
       }
     ]
   },
-  // {
-  //   path: '/roleAdmin',
-  //   component: Layout,
-  //   redirect: '/roleAdmin/index',
-  //   name: '用户管理',
-  //   children: [
-  //     {
-  //       path: 'index',
-  //       name: 'userAdmin',
-  //       component: () => import('@/views/roleAdmin/index'),
-  //       meta: { title: '玩家管理', icon: 'form' }
-  //     },
-  //     {
-  //       path: 'index',
-  //       name: 'userAdmin',
-  //       component: () => import('@/views/roleAdmin/index'),
-  //       meta: { title: '--', icon: 'form' }
-  //     }
-  //   ]
-  // },
   {
     path: '/orderAdmin',
     component: Layout,
@@ -132,87 +98,59 @@ export const constantRouterMap = [
         path: 'index',
         name: 'orderAdmin',
         component: () => import('@/views/orderAdmin/index'),
-        meta: { title: '订单管理', icon: 'form' }
+        meta: { title: '订单管理', icon: 'example' }
       }
     ]
   },
-  // {
-  //   path: '/tree',
-  //   component: Layout,
-  //   children: [
-  //     {
-  //       path: 'tree',
-  //       name: 'tree',
-  //       component: () => import('@/views/tree/test'),
-  //       meta: { title: 'test', icon: 'form' }
-  //     }
-  //   ]
-  // },
-  // {
-  //   path: '/tree2',
-  //   component: Layout,
-  //   children: [
-  //     {
-  //       path: 'tree2',
-  //       name: 'tree2',
-  //       component: () => import('@/views/tree/test2'),
-  //       meta: { title: 'test2', icon: 'form' }
-  //     }
-  //   ]
-  // },
-  // {
-  //   path: '/playStatistics',
-  //   component: Layout,
-  //   children: [
-  //     {
-  //       path: 'index',
-  //       name: 'playStatistics',
-  //       component: () => import('@/views/playStatistics/index'),
-  //       meta: { title: '约战统计', icon: 'people' }
-  //     }
-  //   ]
-  // },
-  // playStatistics
-  // {
-  //   path: '/orderAdmin',
-  //   component: Layout,
-  //   children: [
-  //     {
-  //       path: 'index',
-  //       name: 'orderAdmin',
-  //       component: () => import('@/views/orderAdmin/index'),
-  //       meta: { title: '订单管理', icon: 'form' }
-  //     }
-  //   ]
-  // },
-  // {
-  //   path: '/roleAdmin',
-  //   component: Layout,
-  //   children: [
-  //     {
-  //       path: 'index',
-  //       name: 'roleAdmin',
-  //       component: () => import('@/views/roleAdmin/index'),
-  //       meta: { title: '用户管理', icon: 'user' }
-  //     }
-  //   ]
-  // },
+  {
+    path: '/personInfo',
+    component: Layout,
+    redirect: '/personInfo/index',
+    name: 'person',
+    meta: { title: '个人中心', icon: 'people' },
+    children: [
+      {
+        path: 'index',
+        name: 'personInfo',
+        component: () => import('@/views/personInfo/index'),
+        meta: { title: '修改密码', icon: 'password' }
+      }
+    ]
+  },
+  {
+    path: '/myBusiness',
+    component: Layout,
+    redirect: '/myBusiness/level1',
+    name: 'myBusiness',
+    meta: { title: '业务管理', icon: 'table' },
+    children: [
+      {
+        path: 'level1',
+        name: 'level1',
+        component: () => import('@/views/myBusiness/level1'),
+        meta: { title: '直接玩家', icon: 'form' }
+      },
+      {
+        path: 'level2',
+        name: 'level2',
+        component: () => import('@/views/myBusiness/level2'),
+        meta: { title: '二级代理', icon: 'form' }
+      },
+      {
+        path: 'level3',
+        name: 'level3',
+        component: () => import('@/views/myBusiness/level3'),
+        meta: { title: '三级代理', icon: 'form' }
+      },
+      {
+        path: 'level4',
+        name: 'level4_n',
+        component: () => import('@/views/myBusiness/level4_n.vue'),
+        meta: { title: '四-N', icon: 'form' }
+      }
+    ]
+  },
 
-  // {
-  //   path: '/roleAdmin',
-  //   component: Layout,
-  //   redirect: '/example/table',
-  //   name: 'roleAdmin',
-  //   meta: { title: '用户管理', icon: 'example' },
-  //   children: [
-  //     {
-  //       path: 'index',
-  //       name: 'index',
-  //       component: () => import('@/views/roleAdmin/index'),
-  //       meta: { title: 'Table', icon: 'table' }
-  //     }
-  //   ],
-  // },
   { path: '*', redirect: '/404', hidden: true }
 ]
 
