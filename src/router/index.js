@@ -47,7 +47,12 @@ export const constantRouterMap = [
         path: 'index',
         name: 'userAdmin',
         component: () => import('@/views/roleAdmin/index'),
-        meta: { title: '玩家管理', icon: 'form' }
+        meta: {
+          title: '玩家管理',
+          icon: 'form',
+          roles: ['admin']
+        }
+
       },
       {
         path: 'delegates',
@@ -59,7 +64,7 @@ export const constantRouterMap = [
         path: 'partners',
         name: 'partnerAdmin',
         component: () => import('@/views/partnerAdmin/index'),
-        meta: { title: '合伙人', icon: 'form' }
+        meta: { title: '合伙人', icon: 'form'}
       },
       {
         path: 'tree2',
@@ -98,7 +103,7 @@ export const constantRouterMap = [
         path: 'index',
         name: 'orderAdmin',
         component: () => import('@/views/orderAdmin/index'),
-        meta: { title: '订单管理', icon: 'example' }
+        meta: { title: '订单管理', icon: 'example'}
       }
     ]
   },
@@ -120,34 +125,40 @@ export const constantRouterMap = [
   {
     path: '/myBusiness',
     component: Layout,
-    redirect: '/myBusiness/level1',
+    redirect: '/myBusiness/income',
     name: 'myBusiness',
     meta: { title: '业务管理', icon: 'table' },
     children: [
       {
-        path: 'level1',
-        name: 'level1',
-        component: () => import('@/views/myBusiness/level1'),
-        meta: { title: '直接玩家', icon: 'form' }
+        path: 'income',
+        name: 'income',
+        component: () => import('@/views/myBusiness/income'),
+        meta: { title: '收益记录', icon: 'form' }
       },
-      {
-        path: 'level2',
-        name: 'level2',
-        component: () => import('@/views/myBusiness/level2'),
-        meta: { title: '二级代理', icon: 'form' }
-      },
-      {
-        path: 'level3',
-        name: 'level3',
-        component: () => import('@/views/myBusiness/level3'),
-        meta: { title: '三级代理', icon: 'form' }
-      },
-      {
-        path: 'level4',
-        name: 'level4_n',
-        component: () => import('@/views/myBusiness/level4_n.vue'),
-        meta: { title: '四-N', icon: 'form' }
-      }
+      // {
+      //   path: 'level1',
+      //   name: 'level1',
+      //   component: () => import('@/views/myBusiness/level1'),
+      //   meta: { title: '直接玩家', icon: 'form' }
+      // },
+      // {
+      //   path: 'level2',
+      //   name: 'level2',
+      //   component: () => import('@/views/myBusiness/level2'),
+      //   meta: { title: '二级代理', icon: 'form' }
+      // },
+      // {
+      //   path: 'level3',
+      //   name: 'level3',
+      //   component: () => import('@/views/myBusiness/level3'),
+      //   meta: { title: '三级代理', icon: 'form' }
+      // },
+      // {
+      //   path: 'level4',
+      //   name: 'level4_n',
+      //   component: () => import('@/views/myBusiness/level4_n.vue'),
+      //   meta: { title: '四-N', icon: 'form' }
+      // }
     ]
   },
 

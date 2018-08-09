@@ -27,7 +27,28 @@ export function chargeTimeSearch(time, curPage) {
     method: 'post',
     params: {
       'curPage': curPage,
+
+    }
+  })
+}
+
+export function incomeTimeSearch(time, curPage) {
+  return request({
+    url: '/admin/partnerRecord',
+    method: 'post',
+    params: {
+      'curPage': curPage,
       "time": time
+    }
+  })
+}
+
+export function todayIncomeTimeSearch(curPage) {
+  return request({
+    url: '/admin/todayPartnerRecord',
+    method: 'post',
+    params: {
+      'curPage': curPage
     }
   })
 }
