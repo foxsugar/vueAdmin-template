@@ -63,7 +63,7 @@ export const asyncRouterMap = [
           title: '玩家管理',
           icon: 'form',
           component: () => import('@/views/roleAdmin/index'),
-          roles: ['admin']
+          roles: ['admin', 'delegate']
         }
 
       },
@@ -71,19 +71,19 @@ export const asyncRouterMap = [
         path: 'delegates',
         name: 'delegateAdmin',
         component: () => import('@/views/delegateAdmin/index'),
-        meta: { title: '代理管理', icon: 'form' }
+        meta: { title: '代理管理', icon: 'form' ,  roles: ['admin']}
       },
       {
         path: 'partners',
         name: 'partnerAdmin',
         component: () => import('@/views/partnerAdmin/index'),
-        meta: { title: '合伙人', icon: 'form'}
+        meta: { title: '合伙人', icon: 'form',  roles: ['admin']}
       },
       {
         path: 'tree2',
         name: 'tree2',
         component: () => import('@/views/tree/test2'),
-        meta: { title: '代理关系', icon: 'peoples' }
+        meta: { title: '代理关系', icon: 'peoples',  roles: ['admin', 'delegate']}
       }
     ]
   },
@@ -98,25 +98,26 @@ export const asyncRouterMap = [
         path: 'index',
         name: 'statistics',
         component: () => import('@/views/statistics/index'),
-        meta: { title: '每日数据', icon: 'chart' }
+        meta: { title: '每日数据', icon: 'chart' ,  roles: ['admin', 'delegate']}
       },
       {
         path: 'index2',
         name: 'statistics2',
         component: () => import('@/views/statistics/index2'),
-        meta: { title: '数据走势', icon: 'chart' }
+        meta: { title: '数据走势', icon: 'chart' ,  roles: ['admin', 'delegate']}
       }
     ]
   },
   {
     path: '/orderAdmin',
     component: Layout,
+    meta: { roles: ['admin'] },
     children: [
       {
         path: 'index',
         name: 'orderAdmin',
         component: () => import('@/views/orderAdmin/index'),
-        meta: { title: '订单管理', icon: 'example'}
+        meta: { title: '订单管理', icon: 'example', roles: ['admin']}
       }
     ]
   },
@@ -131,7 +132,7 @@ export const asyncRouterMap = [
         path: 'index',
         name: 'personInfo',
         component: () => import('@/views/personInfo/index'),
-        meta: { title: '修改密码', icon: 'password' }
+        meta: { title: '修改密码', icon: 'password',  roles: ['admin', 'delegate'] }
       }
     ]
   },
@@ -146,7 +147,7 @@ export const asyncRouterMap = [
         path: 'income',
         name: 'income',
         component: () => import('@/views/myBusiness/income'),
-        meta: { title: '收益记录', icon: 'form' }
+        meta: { title: '收益记录', icon: 'form' ,  roles: ['admin', 'delegate']}
       },
       // {
       //   path: 'level1',
