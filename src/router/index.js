@@ -56,16 +56,10 @@ export const asyncRouterMap = [
     },
     children: [
       {
-        path: 'index',
-        name: 'userAdmin',
-
-        meta: {
-          title: '玩家管理',
-          icon: 'form',
-          component: () => import('@/views/roleAdmin/index'),
-          roles: ['admin', 'delegate']
-        }
-
+        path: 'players',
+        name: 'playersAdmin',
+        component: () => import('@/views/roleAdmin/index'),
+        meta: { title: '玩家管理', icon: 'form' ,  roles: ['admin']}
       },
       {
         path: 'delegates',
