@@ -92,13 +92,13 @@ export const asyncRouterMap = [
         path: 'index',
         name: 'statistics',
         component: () => import('@/views/statistics/index'),
-        meta: { title: '每日数据', icon: 'chart' ,  roles: ['admin', 'delegate']}
+        meta: { title: '每日数据', icon: 'chart' ,  roles: ['admin']}
       },
       {
         path: 'index2',
         name: 'statistics2',
         component: () => import('@/views/statistics/index2'),
-        meta: { title: '数据走势', icon: 'chart' ,  roles: ['admin', 'delegate']}
+        meta: { title: '数据走势', icon: 'chart' ,  roles: ['admin']}
       }
     ]
   },
@@ -141,7 +141,7 @@ export const asyncRouterMap = [
         path: 'income',
         name: 'income',
         component: () => import('@/views/myBusiness/income'),
-        meta: { title: '收益记录', icon: 'form' ,  roles: ['admin', 'delegate']}
+        meta: { title: '收益记录', icon: 'form' ,  roles: ['delegate']}
       },
       // {
       //   path: 'level1',
