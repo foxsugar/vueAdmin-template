@@ -2,10 +2,10 @@ import request from '@/utils/request'
 
 export function fetchPartners(val) {
   return request({
-    url: '/admin/fetchPartners',
+    url: '/admin/fetchPartner',
     method: 'post',
     params: {
-      'curPage': val
+      'userId': val
     }
   })
 }
