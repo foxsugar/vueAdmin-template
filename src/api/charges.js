@@ -27,6 +27,7 @@ export function chargeTimeSearch(time, curPage) {
     method: 'post',
     params: {
       'curPage': curPage,
+      'time': time
 
     }
   })

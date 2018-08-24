@@ -3,7 +3,7 @@
     <br>
 
     <div class="filter-container" style="margin-left: 35px">
-      <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" placeholder="用户名"
+      <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" placeholder="用户ID"
                 v-model="userId">
       </el-input>
       &nbsp;
