@@ -192,7 +192,7 @@
           this.searchMode = 0
           this.listQuery.page = 0
         }
-        fetchPartners(this.userId).then(response => {
+        fetchPartner(this.userId).then(response => {
           console.log(response)
           this.tableData = response.data.list
           this.total = response.data.total
