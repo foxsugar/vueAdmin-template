@@ -169,6 +169,21 @@ export const asyncRouterMap = [
       // }
     ]
   },
+  {
+    path: '/tools',
+    component: Layout,
+    redirect: '/tools/index',
+    name: 'tools',
+    meta: { title: '管理工具', icon: 'table' },
+    children: [
+      {
+        path: 'tools',
+        name: 'tools',
+        component: () => import('@/views/tools/index'),
+        meta: { title: '解散房间', icon: 'form' ,  roles: ['admin']}
+      },
+    ]
+  },
 
   { path: '*', redirect: '/404', hidden: true }
 ]
