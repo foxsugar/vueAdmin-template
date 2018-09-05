@@ -182,6 +182,12 @@ export const asyncRouterMap = [
         component: () => import('@/views/tools/index'),
         meta: { title: '解散房间', icon: 'form' ,  roles: ['admin']}
       },
+      {
+        path: 'constant',
+        name: 'constant',
+        component: () => import('@/views/tools/constant'),
+        meta: { title: '游戏常量', icon: 'form' ,  roles: ['admin']}
+      },
     ]
   },
 
