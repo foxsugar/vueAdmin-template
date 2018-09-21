@@ -279,10 +279,11 @@
               //总金额
               this.panelData.chargeIncome = allCharge;
               //充值分布
-              this.chargeData.wxCard = d.logInfo.chargeInfo['1|0'] | 0;
-              this.chargeData.wxGold = d.logInfo.chargeInfo['1|1'] | 0;
-              this.chargeData.appleCard = d.logInfo.chargeInfo['8|0'] | 0;
-              this.chargeData.appleGold = d.logInfo.chargeInfo['8|1'] | 0;
+              console.log("充值分布", d.logInfo.chargeInfo)
+              this.chargeData.wxCard = d.logInfo.chargeInfo['1|0'] |d.logInfo.chargeInfo['1|0.0']| 0;
+              this.chargeData.wxGold = d.logInfo.chargeInfo['1|1.0'] | d.logInfo.chargeInfo['1|1'] | 0;
+              this.chargeData.appleCard = d.logInfo.chargeInfo['8|0']  |d.logInfo.chargeInfo['8|0.0']|0;
+              this.chargeData.appleGold = d.logInfo.chargeInfo['8|1.0'] |d.logInfo.chargeInfo['8|1'] | 0;
             } else {
               this.panelData.registerUser = 0;
               this.panelData.takeOutNum = 0;
