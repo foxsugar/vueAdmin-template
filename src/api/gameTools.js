@@ -10,3 +10,13 @@ export function dissolveRoom(val) {
   })
 }
 
+
+export function dissolveRoomByUserId(val) {
+  return request({
+    url: '/admin/dissolveRoomByUserId',
+    method: 'post',
+    params: {
+      'userId': val
+    }
+  })
+}
