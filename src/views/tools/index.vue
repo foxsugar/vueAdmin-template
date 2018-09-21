@@ -12,12 +12,13 @@
     </div>
 
     <br>
+
     <div style="margin-left: 25px; padding-left: 25px">
       <el-input @keyup.enter.native="dissByUser" style="width: 200px;" class="filter-item" placeholder="玩家id"
                 v-model="userId">
       </el-input>
       &nbsp;&nbsp;
-      <el-button class="filter-item" type="primary" v-waves icon="search" @click="handleFilter">根据玩家id解散房间</el-button>
+      <el-button class="filter-item" type="primary" v-waves icon="search" @click="dissByUser">根据玩家id解散房间</el-button>
     </div>
     <!--<div id="echartContainer" style="width:90%; height:500px;"></div>-->
   </div>
