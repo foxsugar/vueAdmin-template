@@ -21,13 +21,16 @@ export function findCharge(val) {
   })
 }
 // 查询某个时间段订单
-export function chargeTimeSearch(time, curPage) {
+export function chargeTimeSearch(time, curPage, chargeFrom, userId, moneyType) {
   return request({
     url: '/admin/chargeTimeSearch',
     method: 'post',
     params: {
       'curPage': curPage,
-      'time': time
+      'time': time,
+      'chargeFrom': chargeFrom,
+      'userId': userId,
+      'moneyType': moneyType
 
     }
   })

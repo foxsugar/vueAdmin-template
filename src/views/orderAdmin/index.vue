@@ -32,7 +32,42 @@
       :visible.sync="timerDialogVisible"
       width="40%"
       center>
-      <div class="block">
+      <div class="block" style="text-align: center">
+
+        <div style="text-align: center">
+          <el-radio-group v-model="changeFrom">
+            <br>
+            <br>
+            <el-radio :label="1">来自微信</el-radio>
+            <br>
+            <br>
+            <el-radio :label="2">来自后端</el-radio>
+            <br>
+            <br>
+            <el-radio :label="3">来自任意</el-radio>
+            <br>
+            <br>
+          </el-radio-group>
+        </div>
+        <br>
+        <br>
+        <div style="text-align: center">
+          <el-radio-group v-model="moneyType">
+            <br>
+            <br>
+            <el-radio :label="1">房卡充值</el-radio>
+            <br>
+            <br>
+            <el-radio :label="2">金币充值</el-radio>
+            <br>
+            <br>
+            <el-radio :label="3">房卡金币</el-radio>
+            <br>
+            <br>
+          </el-radio-group>
+        </div>
+
+        <br>
         <div style="padding-bottom: 10px">
           创建时间:
         </div>
@@ -294,7 +329,7 @@
           this.searchMode = 1
           this.listQuery.page = 0
         }
-        chargeTimeSearch(this.valueReg + "", this.listQuery.page).then(response => {
+        chargeTimeSearch(this.valueReg + "", this.listQuery.page, this.changeFrom, this.userId, this.moneyType).then(response => {
           console.log(response)
           this.tableData = response.data.list
           this.total = response.data.total
@@ -379,6 +414,8 @@
         timerDialogVisible: false,
         detailVisible: false,
         radio: "1",
+        changeFrom: 1,
+        moneyType:1,
         listQuery: {
           page: 1,
           limit: 20,

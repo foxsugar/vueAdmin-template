@@ -363,6 +363,7 @@
         valueLog: undefined,
         // searchModel = 0按照正常模式搜索searchMode = 1按照时间模式搜索
         searchMode: 0,
+        chargeFrom: 0,
         userId: 0,
         total: 0,
         money: 0,
