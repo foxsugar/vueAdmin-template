@@ -150,6 +150,12 @@
         </el-table-column>
 
         <el-table-column
+          prop="referee"
+          label="上级代理id"
+          width="120">
+        </el-table-column>
+
+        <el-table-column
           prop="ipConfig"
           label="登录IP"
           width="120">
