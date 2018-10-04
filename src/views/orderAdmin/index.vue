@@ -171,8 +171,6 @@
           width="120">
         </el-table-column>
 
-
-
         <el-table-column
           prop="status"
           label="订单状态"
@@ -367,10 +365,13 @@
       }
     },
     created() {
+      alert("111")
+      this.timePage = 0
       this.fetchAll()
     },
     data() {
       return {
+        timePage: 0,
         pickerOptions2: {
           shortcuts: [{
             text: '最近一周',
