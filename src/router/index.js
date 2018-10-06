@@ -135,7 +135,7 @@ export const asyncRouterMap = [
     component: Layout,
     redirect: '/myBusiness/income',
     name: 'myBusiness',
-    meta: { title: '业务管理', icon: 'table' },
+    meta: { title: '业务管理', icon: 'table',roles: ['admin']},
     children: [
       {
         path: 'income',
