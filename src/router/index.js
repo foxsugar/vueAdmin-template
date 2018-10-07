@@ -135,7 +135,7 @@ export const asyncRouterMap = [
     component: Layout,
     redirect: '/myBusiness/income',
     name: 'myBusiness',
-    meta: { title: '业务管理', icon: 'table',roles: ['admin']},
+    meta: { title: '业务管理', icon: 'table'},
     children: [
       {
         path: 'income',
@@ -174,7 +174,7 @@ export const asyncRouterMap = [
     component: Layout,
     redirect: '/tools/index',
     name: 'tools',
-    meta: { title: '管理工具', icon: 'table' },
+    meta: { title: '管理工具', icon: 'table',roles: ['admin'] },
     children: [
       {
         path: 'tools',
