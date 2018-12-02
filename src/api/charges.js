@@ -1,4 +1,5 @@
 import request from '@/utils/request'
+import user from '../store/modules/user'
 
 // 查询所有订单
 export function findCharges(val) {
@@ -36,13 +37,14 @@ export function chargeTimeSearch(time, curPage, chargeFrom, userId, moneyType) {
   })
 }
 
-export function incomeTimeSearch(time, curPage) {
+export function incomeTimeSearch(time, curPage, userId) {
   return request({
     url: '/admin/partnerRecord',
     method: 'post',
     params: {
       'curPage': curPage,
-      "time": time
+      "time": time,
+      "userId": userId
     }
   })
 }

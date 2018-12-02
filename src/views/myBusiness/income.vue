@@ -7,12 +7,20 @@
                 <!--v-model="userId">-->
       <!--</el-input>-->
       <!--&nbsp;-->
+      <div v-if="fakeId==1" style="float: left">
+        <el-input @keyup.enter.native="handleFilter" style="width: 120px;" class="filter-item" placeholder="用户ID"
+                  v-model="userId">
+        </el-input>
+      </div>
+
+      &nbsp;&nbsp;&nbsp;
       <!--<el-button class="filter-item" type="primary" v-waves icon="search" @click="handleFilter">搜索</el-button>-->
       <el-button type="primary" @click="handleTimerFilter">按时间搜索</el-button>
       <br>
       <br>
 
     </div>
+
 
     <el-dialog
       title="按时间搜索"
@@ -40,8 +48,11 @@
     <el-button @click="doCancel">取 消</el-button>
     <el-button type="primary"@click="doSearch">确 定</el-button>
 
+
   </span>
     </el-dialog>
+
+
 
     <div style="margin-left: 35px; width: 90%">
       <el-table
@@ -118,6 +129,7 @@
           console.log(response)
           this.tableData = response.data.list
           this.total = response.data.count
+          this.fakeId = response.data.userId
         })
       },
       moneyFormat(row, column){
@@ -193,7 +205,7 @@
           this.searchMode = 1
           this.listQuery.page = 0
         }
-        incomeTimeSearch(this.valueReg + "", this.listQuery.page).then(response => {
+        incomeTimeSearch(this.valueReg + "", this.listQuery.page, this.userId).then(response => {
           console.log(response)
           this.tableData = response.data.list
           this.total = response.data.count
@@ -268,6 +280,7 @@
         // searchModel = 0按照正常模式搜索searchMode = 1按照时间模式搜索
         searchMode: 0,
         userId: 0,
+        fakeId:0,
         total: 0,
         money: 0,
         presentMoney: 0,
